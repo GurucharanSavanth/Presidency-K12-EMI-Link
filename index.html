@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GrayQuest EMI Application — Presidency Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0d2045;
+    --navy-mid: #1a3160;
+    --gold: #c9a227;
+    --gold-light: #f5e4a0;
+    --cream: #fdf9f2;
+    --white: #ffffff;
+    --text-dark: #0d2045;
+    --text-mid: #3a4a6a;
+    --text-muted: #6b7a99;
+    --border: #dce3f0;
+    --card-bg: #ffffff;
+    --hover-bg: #f0f5ff;
+    --section-bg-1: #edf2fc;
+    --section-bg-2: #eaf4f0;
+    --section-bg-3: #fdf3e7;
+    --tag-1: #1a3160;
+    --tag-2: #0a5440;
+    --tag-3: #7a4510;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  header {
+    background: var(--navy);
+    color: white;
+    padding: 48px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.02) 40px,
+      rgba(255,255,255,0.02) 80px
+    );
+  }
+  .header-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+  .header-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 5vw, 38px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    color: white;
+  }
+  header h1 span { color: var(--gold); }
+  header p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* ── Step instruction bar ── */
+  .step-bar {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 13.5px;
+    color: var(--text-mid);
+  }
+  .step-dot {
+    width: 22px; height: 22px;
+    background: var(--navy);
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 600; flex-shrink: 0;
+  }
+  .step-arrow { color: var(--border); font-size: 16px; }
+
+  /* ── Main content ── */
+  main { max-width: 920px; margin: 0 auto; padding: 40px 20px 60px; }
+
+  /* ── Institution section ── */
+  .institution {
+    margin-bottom: 40px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .institution-header {
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .inst-icon {
+    width: 46px; height: 46px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .institution-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--text-dark);
+  }
+  .institution-header .count-tag {
+    margin-left: auto;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+
+  .inst-1 .institution-header { background: var(--section-bg-1); }
+  .inst-1 .inst-icon { background: rgba(26,49,96,0.12); }
+  .inst-1 .count-tag { background: rgba(26,49,96,0.12); color: var(--tag-1); }
+
+  .inst-2 .institution-header { background: var(--section-bg-2); }
+  .inst-2 .inst-icon { background: rgba(10,84,64,0.12); }
+  .inst-2 .count-tag { background: rgba(10,84,64,0.12); color: var(--tag-2); }
+
+  .inst-3 .institution-header { background: var(--section-bg-3); }
+  .inst-3 .inst-icon { background: rgba(122,69,16,0.12); }
+  .inst-3 .count-tag { background: rgba(122,69,16,0.12); color: var(--tag-3); }
+
+  .branches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .branch-card {
+    background: var(--card-bg);
+    padding: 20px 20px 18px;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: background 0.15s ease;
+    position: relative;
+  }
+  .branch-card:hover { background: var(--hover-bg); }
+  .branch-card:hover .arrow-icon { opacity: 1; transform: translate(2px, -2px); }
+
+  .pin-icon {
+    font-size: 18px;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .branch-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.3;
+  }
+  .branch-location {
+    font-size: 13px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .loc-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .link-label {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-top: 6px;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .arrow-icon {
+    opacity: 0.4;
+    display: inline-block;
+    transition: opacity 0.15s, transform 0.15s;
+    font-size: 13px;
+  }
+
+  /* ── Manual Section ── */
+  .manual-section {
+    background: var(--navy);
+    padding: 20px 24px;
+  }
+  .manual-inner {
+    max-width: 920px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .manual-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+  .manual-text { flex: 1; }
+  .manual-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+  }
+  .manual-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    margin-top: 2px;
+  }
+  .manual-btn {
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+    flex-shrink: 0;
+  }
+  .manual-btn:hover { opacity: 0.88; }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    background: white;
+  }
+  footer strong { color: var(--navy); }
+
+  /* ── Mobile ── */
+  @media (max-width: 600px) {
+    .step-bar { flex-direction: column; text-align: center; }
+    .step-arrow { display: none; }
+    .branches-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 380px) {
+    .branches-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-badge">GrayQuest EMI Portal</div>
+    <h1>Presidency Group of Schools<br><span>Fee Instalment Application</span></h1>
+    <p>Select your school branch below to open the EduNext ERP portal and complete your GrayQuest EMI application.</p>
+  </div>
+</header>
+
+<div class="step-bar">
+  <div class="step-dot">1</div>
+  <span>Find your school &amp; branch</span>
+  <div class="step-arrow">›</div>
+  <div class="step-dot">2</div>
+  <span>Click to open the ERP portal</span>
+  <div class="step-arrow">›</div>
+  <div class="step-dot">3</div>
+  <span>Complete your EMI application</span>
+</div>
+
+<main>
+
+  <!-- St Paul's English School -->
+  <div class="institution inst-1">
+    <div class="institution-header">
+      <div class="inst-icon">🏫</div>
+      <h2>St. Paul's English School</h2>
+      <div class="count-tag">1 Branch</div>
+    </div>
+    <div class="branches-grid">
+      <a class="branch-card" href="https://spes.edunexttechnologies.com" target="_blank" rel="noopener">
+        <div class="pin-icon">📍</div>
+        <div class="branch-name">St. Paul's English School</div>
+        <div class="branch-location"><span class="loc-dot"></span>JP Nagar, Bangalore</div>
+        <div class="link-label">Open ERP Portal <span class="arrow-icon">↗</span></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Presidency School -->
+  <div class="institution inst-2">
+    <div class="institution-header">
+      <div class="inst-icon">🎓</div>
+      <h2>Presidency School</h2>
+      <div class="count-tag">7 Branches</div>
+    </div>
+    <div class="branches-grid">
+      <a class="branch-card" href="https://psbs.edunexttechnologies.com/" target="_blank" rel="noopener">
+        <div class="pin-icon">📍</div>
+        <div class="branch-name">Presidency School</div>
+        <div class="branch-location"><span class="loc-dot"></span>Bilekahalli</div>
+        <div class="link-label">Open ERP Portal <span class="arrow-icon">↗</span></div>
+      </a>
+      <a class="branch-card" href="https://psbsk.edunexttechnologies.com" target="_blank" rel="noopener">
+        <div class="pin-icon">📍</div>
+        <div class="branch-name">Presidency School</div>
+        <div class="branch-location"><span class="loc-dot"></span>Banashankari</div>
+        <div class="link-label">Open ERP Portal <span class="arrow-icon">↗</span></div>
+      </a>
+      <a class="branch-card" href="https://psbn.edunexttechnologies.com" target="_blank" rel="noopener">
+        <div class="pin-icon">📍</div>
+        <div class="branch-name">Presidency School</div>
+        <div class="branch-location"><span class="loc-dot"></span>Yelahanka</div>
+        <div class="link-label">Open ERP Portal <span class="arrow-icon">↗</span></div>
+      </a>
+      <a class="branch-card" href="https://psbe.edunexttechnologies.com" target="_blank" rel="noopener">
+        <div class="pin-icon">📍</div>
+        <div class="branch-name">Presidency School</div>
+        <div class="branch-location"><span class="loc-dot"></span>Kasturinagar</div>
+        <div class="link-label">Open ERP Portal <span class="arrow-icon">↗</span></div>
+      </a>
+      <a class="branch-card" href="https://psnlo.edunexttechnologies.com" target="_blank" rel="noopener">
+        <div class="pin-icon">📍</div>
+        <div class="branch-name">Presidency School</div>
+        <div class="branch-location"><span class="loc-dot"></span>Nandini Layout</div>
+        <div class="link-label">Open ERP Portal <span class="arrow-icon">↗</span></div>
+      </a>
+      <a class="branch-card" href="https://psrtn.edunexttechnologies.com" target="_blank" rel="noopener">
+        <div class="pin-icon">📍</div>
+        <div class="branch-name">Presidency School</div>
+        <div class="branch-location"><span class="loc-dot"></span>R T Nagar</div>
+        <div class="link-label">Open ERP Portal <span class="arrow-icon">↗</span></div>
+      </a>
+      <a class="branch-card" href="https://psmng.edunexttechnologies.com/Index" target="_blank" rel="noopener">
+        <div class="pin-icon">📍</div>
+        <div class="branch-name">Presidency School</div>
+        <div class="branch-location"><span class="loc-dot"></span>Mangalore</div>
+        <div class="link-label">Open ERP Portal <span class="arrow-icon">↗</span></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Presidency College Pre-University -->
+  <div class="institution inst-3">
+    <div class="institution-header">
+      <div class="inst-icon">🏛️</div>
+      <h2>Presidency College Pre-University</h2>
+      <div class="count-tag">4 Branches</div>
+    </div>
+    <div class="branches-grid">
+      <a class="branch-card" href="https://psmngcoll.edunexttechnologies.com/Index" target="_blank" rel="noopener">
+        <div class="pin-icon">📍</div>
+        <div class="branch-name">Presidency College PU</div>
+        <div class="branch-location"><span class="loc-dot"></span>Mangalore</div>
+        <div class="link-label">Open ERP Portal <span class="arrow-icon">↗</span></div>
+      </a>
+      <a class="branch-card" href="https://puhebbal.edunexttechnologies.com" target="_blank" rel="noopener">
+        <div class="pin-icon">📍</div>
+        <div class="branch-name">Presidency College PU</div>
+        <div class="branch-location"><span class="loc-dot"></span>Hebbal</div>
+        <div class="link-label">Open ERP Portal <span class="arrow-icon">↗</span></div>
+      </a>
+      <a class="branch-card" href="https://pkog.edunexttechnologies.com" target="_blank" rel="noopener">
+        <div class="pin-icon">📍</div>
+        <div class="branch-name">Presidency College PU</div>
+        <div class="branch-location"><span class="loc-dot"></span>Kogilu</div>
+        <div class="link-label">Open ERP Portal <span class="arrow-icon">↗</span></div>
+      </a>
+      <a class="branch-card" href="https://pypr.edunexttechnologies.com/Index" target="_blank" rel="noopener">
+        <div class="pin-icon">📍</div>
+        <div class="branch-name">Presidency College PU</div>
+        <div class="branch-location"><span class="loc-dot"></span>Yeshwantpur</div>
+        <div class="link-label">Open ERP Portal <span class="arrow-icon">↗</span></div>
+      </a>
+    </div>
+  </div>
+
+</main>
+
+<section class="manual-section">
+  <div class="manual-inner">
+    <div class="manual-icon">📘</div>
+    <div class="manual-text">
+      <div class="manual-title">EMI User Manual</div>
+      <div class="manual-desc">A Step-by-Step Guide</div>
+    </div>
+    <a class="manual-btn" href="https://drive.google.com/drive/folders/1NAHYvTar4KLwLWpMAG7Dc7IKNpTtPuFt?usp=sharing" target="_blank" rel="noopener">Click Here ↗</a>
+  </div>
+</section>
+
+<footer>
+  <p>GrayQuest EMI Application Portal · For support: <strong>080-71714239</strong> · <strong>presidency.support@grayquest.com</strong></p>
+</footer>
+
+</body>
+</html>
